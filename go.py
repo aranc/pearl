@@ -10,11 +10,11 @@ from parameters import ParametersFactory
 from utils import extract_func_and_args
 
 parser = argparse.parser()
-parser.add_argument("--model")
-parser.add_argument("--parameters", nargs="+")
-parser.add_argument("--investigators", nargs="+")
+parser.add_argument("--model", default="x->y;z->x;z->y")
+parser.add_argument("--parameters", nargs="+", default=["rand"])
+parser.add_argument("--investigators", nargs="+", default=["rct"])
 parser.add_argument("--num_samples", type=int, default=10000)
-parser.add_argument("--question")
+parser.add_argument("--question", default="x->y")
 args = parser.parse_args()
 
 # Setup
@@ -22,7 +22,7 @@ args = parser.parse_args()
 investigators = []
 for investigator in args.invetigators:
     investigator, args = extract_func_and_args(investigator)
-    investigators.append(investigator, importlib.import_module(investigator).Investigator(args))
+    investigators.append(investigator, importlib.import_module(f"investigators.{investigator}").Investigator(args))
 
 template = Template(args.model)
 worlds = []
