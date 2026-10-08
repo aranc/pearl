@@ -5,25 +5,43 @@
 import argparse
 import importlib
 
-from model import Template, World
+from model import Template, World, parse_question
 from parameters import ParametersFactory
 
 parser = argparse.parser()
 parser.add_argument("--model")
 parser.add_argument("--parameters", nargs="+")
 parser.add_argument("--investigators", nargs="+")
+parser.add_argument("--num_samples", type=int, default=10000)
+parser.add_argument("--question")
 args = parser.parse_args()
 
 # Setup
 
 investigators = []
 for investigator in args.invetigators:
-    investigators.append(importlib.import_module(investigator).Investigator)
+    investigators.append(investigator, importlib.import_module(investigator).Investigator)
 
 template = Template(args.model)
 worlds = []
 for strategy in args.parameters:
-    world = World(template, ParametersFactory(strategy, template.parameters()))
-    worlds.append(world)
+    for parameters in ParametersFactory(strategy, template.parameters()):
+        world = World(template, parameters)
+        worlds.append(world)
+
+x, y = parse_question(args.question)
+
+# Benchmark
+
+for world_idx, world in enumerate(worlds):
+    print(f"Running for world #{world_idx}")
+    print(world.parameters)
+
+    for investigator_name, investigator in invetigators:
+        print("Investigator:", investigator_name)
+        answer = investigator(world, args.num_samples, (x, y))
+        print("Answer:", answer)
+
+
 
 
