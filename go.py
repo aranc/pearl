@@ -45,5 +45,3 @@ for world_idx, world in enumerate(worlds):
         print("Answer:", answer)
 
 
-
-
