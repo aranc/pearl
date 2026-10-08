@@ -7,6 +7,7 @@ import importlib
 
 from model import Template, World, parse_question
 from parameters import ParametersFactory
+from utils import extract_func_and_args
 
 parser = argparse.parser()
 parser.add_argument("--model")
@@ -20,7 +21,8 @@ args = parser.parse_args()
 
 investigators = []
 for investigator in args.invetigators:
-    investigators.append(investigator, importlib.import_module(investigator).Investigator)
+    investigator, args = extract_func_and_args(investigator)
+    investigators.append(investigator, importlib.import_module(investigator).Investigator(args))
 
 template = Template(args.model)
 worlds = []
