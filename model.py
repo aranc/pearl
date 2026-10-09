@@ -4,6 +4,12 @@
 from copy import deepcopy
 from functools import cached_property
 
+def parse_question(s):
+    return parse_arrow_expression(s)
+
+def parse_arrow_expression(s):
+    return (_.strip() for _ in s.split("->"))
+
 def prod(*args):
     res = 1
     for arg in args:
@@ -11,7 +17,14 @@ def prod(*args):
     return res
 
 class Template:
-    def __init__(self, edges:dict[str, str]):
+    def __init__(self, edges:str):
+        edges = {}
+        for arrow in edge.split(";"):
+            a, b = parse_arrow_expression(arrow)
+            edges[a] = b
+        self.init(edges)
+
+    def init(self, edges:dict[str, str]):
         self.edges = deepcopy(edges)
         self.nodes = []
         self.parents = {}
