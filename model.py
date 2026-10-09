@@ -1,4 +1,5 @@
 #baysean casual model
+#assuming noisy-or model
 
 from copy import deepcopy
 from functools import cached_property
@@ -28,4 +29,34 @@ class Template:
 
     @cached_property
     def parameters(self):
-        pass
+        params = []
+        for node in self.nodes:
+            if not self.parents[node]:
+                params.add(node)
+            else:
+                for parent in self.parents[node]:
+                    params.add((parent, node))
+
+        return tuple(params)
+
+class World:
+    def __init__(self, template, parameters):
+        self.edges = deepcopy(template.edges)
+        self.nodes = deepcopy(template.nodes)
+        self.parents = deepcopy(template.parents)
+        self.childs = deepcopy(template.childs)
+        
+        self.prime = {}
+        self.noisy_or = {}
+
+        for key, value in zip(template.parameters(), parameters):
+            if type(key) is not tuple:
+                assert key in self.nodes
+                self.prime[key] = value
+            else:
+                parent, child = key
+                assert parent in self.nodes
+                assert child in self.nodes
+                if child not in self.noisy_or:
+                    self.noisy_or[child] = {}
+                self.noisy_or[child][parent] = value
