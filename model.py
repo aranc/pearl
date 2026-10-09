@@ -60,3 +60,29 @@ class World:
                 if child not in self.noisy_or:
                     self.noisy_or[child] = {}
                 self.noisy_or[child][parent] = value
+
+    def __call__(self, do):
+        # need to topologically sort and fill values, but overwrite those that are present in the "do operator"
+
+        dependencies = deepcopy(self.parents)
+        next_up = deepcopy(self.prime.keys())
+        res = {}
+        while next_up:
+            x = next_up.pop()
+            if x in do:
+                res[x] = do[x]
+            else:
+                pass #noisy or sampling
+
+            # update dependencies graph and update next_up
+            for child in self.childs[x]:
+                assert x in dependencies[child]
+                dependencies[child].del(x)
+                assert x not in dependencies[child]
+
+                if not dependencies[child]:
+                    dependencies.del(child)
+                    next_up.append(child)
+
+        assert len(res) == len(self.nodes)
+        return res
