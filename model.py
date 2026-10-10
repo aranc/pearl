@@ -12,8 +12,8 @@ def parse_arrow_expression(s):
 
 def prod(*args):
     res = 1
-    print("$$$", arg, type(arg))
     for arg in args:
+        print("$$$", arg, type(arg))
         res *= arg
     return res
 
