@@ -16,6 +16,7 @@ parser.add_argument("--investigators", nargs="+", default=["rct"])
 parser.add_argument("--num_samples", type=int, default=10000)
 parser.add_argument("--question", default="x->y")
 args = parser.parse_args()
+print(args)
 
 # Setup
 
