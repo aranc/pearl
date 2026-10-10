@@ -31,7 +31,7 @@ class Template:
         self.childs = {}
 
         for x, y in edges.items():
-            if x not in nodes:
+            if x not in self.nodes:
                 self.nodes.append(x)
                 self.parents[x] = []
                 self.childs[x] = []
