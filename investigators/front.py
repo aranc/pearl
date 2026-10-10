@@ -40,8 +40,8 @@ class Investigator:
         not_x = count_x_z[0] / num_samples
         yes_x = count_x_z[1] / num_samples
         
-        a = (not_x * not_x_causes_z + yes_x * x_causes_z) * z_causes_y + (yes_x * x_causes_not_z + not_x * not_x_causes_not_z) * not_z_causes_y)
-        b = (not_x * not_x_causes_z + yes_x * x_causes_z) * z_causes_y + (yes_x * x_causes_not_z + not_x * not_x_causes_not_z) * not_z_causes_y)
+        a = (not_x * not_x_causes_z + yes_x * x_causes_z) * z_causes_y + (yes_x * x_causes_not_z + not_x * not_x_causes_not_z) * not_z_causes_y
+        b = (not_x * not_x_causes_z + yes_x * x_causes_z) * z_causes_y + (yes_x * x_causes_not_z + not_x * not_x_causes_not_z) * not_z_causes_y
 
         # is this really the same as equations.png??
         return a, b
