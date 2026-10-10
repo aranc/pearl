@@ -18,11 +18,11 @@ def prod(*args):
 
 class Template:
     def __init__(self, edges:str):
-        edges = {}
+        _edges = {}
         for arrow in edges.split(";"):
             a, b = parse_arrow_expression(arrow)
-            edges[a] = b
-        self.init(edges)
+            _edges[a] = b
+        self.init(_edges)
 
     def init(self, edges:dict[str, str]):
         self.edges = deepcopy(edges)
