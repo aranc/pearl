@@ -22,7 +22,7 @@ args = parser.parse_args()
 investigators = []
 for investigator in args.investigators:
     investigator, args = extract_func_and_args(investigator)
-    investigators.append(investigator, importlib.import_module(f"investigators.{investigator}").Investigator(args))
+    investigators.append((investigator, importlib.import_module(f"investigators.{investigator}").Investigator(args)))
 
 template = Template(args.model)
 worlds = []
