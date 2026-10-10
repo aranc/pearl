@@ -109,7 +109,7 @@ class World:
         assert len(res) == len(self.nodes)
         return res
 
-    def parameters():
+    def parameters(self):
         s = ""
         for x in self.prime:
             s += f"{x}:{self.prime[x]} "
