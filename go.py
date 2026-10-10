@@ -20,7 +20,7 @@ args = parser.parse_args()
 # Setup
 
 investigators = []
-for investigator in args.investigator:
+for investigator in args.investigators:
     investigator, args = extract_func_and_args(investigator)
     investigators.append(investigator, importlib.import_module(f"investigators.{investigator}").Investigator(args))
 
