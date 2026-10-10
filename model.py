@@ -81,7 +81,7 @@ class World:
                     self.noisy_or[child] = {}
                 self.noisy_or[child][parent] = value
 
-    def __call__(self, do):
+    def __call__(self, do=()):
         # need to topologically sort and fill values, but overwrite those that are present in the "do operator"
 
         dependencies = deepcopy(self.parents)
