@@ -84,7 +84,7 @@ class World:
         # need to topologically sort and fill values, but overwrite those that are present in the "do operator"
 
         dependencies = deepcopy(self.parents)
-        next_up = deepcopy(self.prime.keys())
+        next_up = list(self.prime.keys())
         res = {}
         while next_up:
             x = next_up.pop()
