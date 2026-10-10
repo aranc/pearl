@@ -99,7 +99,7 @@ class World:
             # update dependencies graph and update next_up
             for child in self.childs[x]:
                 assert x in dependencies[child]
-                del dependencies[child][x]
+                dependencies[child].remove(x)
                 assert x not in dependencies[child]
 
                 if not dependencies[child]:
