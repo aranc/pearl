@@ -16,14 +16,13 @@ parser.add_argument("--investigators", nargs="+", default=["rct"])
 parser.add_argument("--num_samples", type=int, default=10000)
 parser.add_argument("--question", default="x->y")
 args = parser.parse_args()
-print(args)
 
 # Setup
 
 investigators = []
 for investigator in args.investigators:
-    investigator, args = extract_func_and_args(investigator)
-    investigators.append((investigator, importlib.import_module(f"investigators.{investigator}").Investigator(args)))
+    investigator, _args = extract_func_and_args(investigator)
+    investigators.append((investigator, importlib.import_module(f"investigators.{investigator}").Investigator(_args)))
 
 template = Template(args.model)
 worlds = []
