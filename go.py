@@ -39,7 +39,7 @@ for world_idx, world in enumerate(worlds):
     print(f"Running for world #{world_idx}")
     print(world.parameters)
 
-    for investigator_name, investigator in invetigators:
+    for investigator_name, investigator in investigators:
         print("Investigator:", investigator_name)
         answer = investigator(world, args.num_samples, (x, y))
         print("Answer:", answer)
