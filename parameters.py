@@ -1,5 +1,5 @@
 import random
-from util import extract_func_and_args
+from utils import extract_func_and_args
 
 def ParametersFactory(strategy, template_parameters):
     if "rand" in strategy:

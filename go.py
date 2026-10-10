@@ -9,7 +9,7 @@ from model import Template, World, parse_question
 from parameters import ParametersFactory
 from utils import extract_func_and_args
 
-parser = argparse.parser()
+parser = argparse.ArgumentParser()
 parser.add_argument("--model", default="x->y;z->x;z->y")
 parser.add_argument("--parameters", nargs="+", default=["rand"])
 parser.add_argument("--investigators", nargs="+", default=["rct"])
