@@ -19,7 +19,7 @@ def prod(*args):
 class Template:
     def __init__(self, edges:str):
         edges = {}
-        for arrow in edge.split(";"):
+        for arrow in edges.split(";"):
             a, b = parse_arrow_expression(arrow)
             edges[a] = b
         self.init(edges)
