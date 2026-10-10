@@ -9,7 +9,7 @@ def extract_func_and_args(s):
 
     assert b >= a
 
-    if a == b or s[a, b].strip() == "":
+    if a == b or s[a:b].strip() == "":
         return s[:s.index("(")].strip(), None
 
-    return s[:s.index("(")].strip(), s[a,b].strip()
+    return s[:s.index("(")].strip(), s[a:b].strip()
