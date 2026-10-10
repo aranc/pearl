@@ -1,6 +1,7 @@
 #baysean casual model
 #assuming noisy-or model
 
+import random
 from copy import deepcopy
 from functools import cache
 
