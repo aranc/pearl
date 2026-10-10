@@ -92,7 +92,7 @@ class World:
                 res[x] = do[x]
             else:
                 #noisy or sampling
-                p = 1 - prod(1 - self.noisy_or(x, parent) for parent in self.parents[x])
+                p = 1 - prod(1 - self.noisy_or[x][parent] for parent in self.parents[x])
                 res[x] = 1 if random.random() <= p else 0
 
             # update dependencies graph and update next_up
@@ -107,3 +107,12 @@ class World:
 
         assert len(res) == len(self.nodes)
         return res
+
+    def parameters():
+        s = ""
+        for x in self.prime:
+            s += f"{x}:{self.prime[x]} "
+        for x in self.noisy_or:
+            for y in self.noisy_or[x]:
+                s += f"{y}->{x}:{self.noisy_or[x][y]} "
+        return s
