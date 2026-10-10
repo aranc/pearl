@@ -2,7 +2,7 @@
 #assuming noisy-or model
 
 from copy import deepcopy
-from functools import cached_property
+from functools import cache
 
 def parse_question(s):
     return parse_arrow_expression(s)
@@ -46,7 +46,7 @@ class Template:
             if x not in self.childs[y]:
                 self.childs[y].append(x)
 
-    @cached_property
+    @cache
     def parameters(self):
         params = []
         for node in self.nodes:
