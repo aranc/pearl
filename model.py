@@ -12,6 +12,7 @@ def parse_arrow_expression(s):
 
 def prod(*args):
     res = 1
+    print(arg, type(arg))
     for arg in args:
         res *= arg
     return res
