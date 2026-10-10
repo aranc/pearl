@@ -35,7 +35,7 @@ class Template:
                 self.nodes.append(x)
                 self.parents[x] = []
                 self.childs[x] = []
-            if y not in nodes:
+            if y not in self.nodes:
                 self.nodes.append(y)
                 self.parents[y] = []
                 self.childs[y] = []
