@@ -51,10 +51,10 @@ class Template:
         params = []
         for node in self.nodes:
             if not self.parents[node]:
-                params.add(node)
+                params.append(node)
             else:
                 for parent in self.parents[node]:
-                    params.add((parent, node))
+                    params.append((parent, node))
 
         return tuple(params)
 
