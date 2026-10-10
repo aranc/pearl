@@ -33,8 +33,11 @@ class Investigator:
 
         z_causes_y = res_z_y[1] / res_z_y[1]
         not_z_causes_y = res_z_y[0] / res_z_y[1]
-        
-        return (not_x_causes_z * z_causes_y + not_x_causes_not_z * not_z_causes_y)
-                x_causes_z * z_causes_y + x_causes_not_z * not_z_causes_y)
 
-        todo: this is not complete, need to compete this
+        x_causes_not_z = 1 - x_causes_z
+        not_x_causes_not_z = 1 - not_x_causes_z
+
+        not_x = count_x_z[0] / num_samples
+        yes_x = count_x_z[1] / num_samples
+        
+        b = (not_x * not_x_causes_z + yes_x * x_causes_z) * z_causes_y + (yes_x * x_causes_not_z + not_x * not_x_causes_not_z) * not_z_causes_y)
