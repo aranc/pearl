@@ -112,7 +112,17 @@ class World:
         assert len(res) == len(self.nodes)
         return res
 
-    def parameters(self):
+    @cache
+    def parameters(self, raw=False):
+        if raw:
+            res = {}
+            for x in self.prime:
+                raw[x] = self.prime[x]
+            for x in self.noisy_or:
+                for y in self.noisy_or[x]:
+                    raw[f"{y}->{x}"] = self.noisy_or[x][y]
+            return res
+
         s = ""
         for x in self.prime:
             s += f"{x}:{self.prime[x]} "

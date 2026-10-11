@@ -16,6 +16,7 @@ def extract_func_and_args(s):
 
 
 def eval_expression(expr, parameters):
-    keys = sort(parameters.keys(), key: lambda x: len(x))
+    print(parameters)
+    keys = sorted(parameters.keys(), key=lambda x: len(x))
     print(keys)
     raise
