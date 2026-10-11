@@ -1,5 +1,6 @@
 #backdoor casual investigator
 import random
+from utils import safediv
 
 class Investigator:
     def __init__(self, args):
@@ -33,5 +34,5 @@ class Investigator:
 
         z_prop = countz / num_samples
 
-        return (res0[0]/count0[0] * (1-z_prop) + res1[0]/count1[0] * z_prop,
-                res0[1]/count0[1] * (1-z_prop) + res1[1]/count1[1] * z_prop)
+        return (safediv(res0[0],count0[0]) * (1-z_prop) + safediv(res1[0],count1[0]) * z_prop,
+                safediv(res0[1],count0[1]) * (1-z_prop) + safediv(res1[1],count1[1]) * z_prop)

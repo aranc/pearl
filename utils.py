@@ -20,3 +20,8 @@ def eval_expression(expr, parameters):
     for key in keys:
         expr = expr.replace(key, str(parameters[key]))
     return eval(expr)
+
+def safediv(a, b):
+    if a == 0 and b == 0:
+        return 0
+    return a / b
