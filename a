@@ -6,7 +6,11 @@ N=100000
 
 #########################################3
 
+#using --eval
 #python3 go.py --num_samples $N --model "x->y;z->x;z->y" --parameters rand --investigators rct --eval "z*(z->y)" --eval "1-(1-z*(z->y))" --eval "1-(1-z*(z->y))*(1-(x->y))"
 
-echo back doesnt work
-python3 go.py --num_samples $N --model "x->y;z->x;z->y;w->x" --parameters rand --investigators rct naive "back(z)"
+# back corrected to make back(z) work (added w->x)
+#python3 go.py --num_samples $N --model "x->y;z->x;z->y;w->x" --parameters rand --investigators rct naive "back(z)"
+
+#front
+python3 go.py --num_samples $N --model "x->z;z->y;h->x;h->y" --parameters rand --investigators rct naive "front(z)"
