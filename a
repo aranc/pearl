@@ -1,4 +1,5 @@
 N=100000
+N=100
 #python3 go.py --num_samples $N --model "x->y" --parameters rand --investigators rct naive
 #python3 go.py --num_samples $N --model "x->y;z->x;z->y" --parameters rand --investigators rct naive "back(z)"
 #python3 go.py --num_samples $N --model "x->z;z->y;h->x;h->y" --parameters rand --investigators rct naive "front(z)"
