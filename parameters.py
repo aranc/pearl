@@ -7,6 +7,8 @@ def ParametersFactory(strategy, template_parameters):
         assert f == "rand"
         if n is None:
             n = 1
+        else:
+            n = int(n)
         res = []
         for _ in range(n):
             res.append([random.random() for _ in range(len(template_parameters))])
@@ -14,5 +16,5 @@ def ParametersFactory(strategy, template_parameters):
 
     res = strategy.split(",")
     assert len(res) == len(template_parameters)
-    res = [float(_) for float in res]
+    res = [float(_) for _ in res]
     return [res]
