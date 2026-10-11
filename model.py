@@ -22,7 +22,7 @@ class Template:
         _edges = {}
         for arrow in edges.split(";"):
             a, b = parse_arrow_expression(arrow)
-            _edges[a] = b
+            _edges[b] = a
         self.init(_edges)
 
     def init(self, edges:dict[str, str]):
