@@ -7,7 +7,7 @@ import importlib
 
 from model import Template, World, parse_question
 from parameters import ParametersFactory
-from utils import extract_func_and_args
+from utils import extract_func_and_args, eval_expression
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model", default="x->y;z->x;z->y")
@@ -15,6 +15,7 @@ parser.add_argument("--parameters", nargs="+", default=["rand"])
 parser.add_argument("--investigators", nargs="+", default=["rct"])
 parser.add_argument("--num_samples", type=int, default=10000)
 parser.add_argument("--question", default="x->y")
+parser.add_argument("--eval", action="append", type=str)
 args = parser.parse_args()
 
 # Setup
@@ -44,4 +45,7 @@ for world_idx, world in enumerate(worlds):
         answer = investigator(world, args.num_samples, (x, y))
         print("Answer:", answer)
 
-
+    # Debug code: eval symbolic expressions containing world parameters
+    if args.eval:
+        for expr in args.eval:
+            print(expr, eval_expression(expr, world.parameters()))

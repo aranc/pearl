@@ -13,3 +13,9 @@ def extract_func_and_args(s):
         return s[:s.index("(")].strip(), None
 
     return s[:s.index("(")].strip(), s[a:b].strip()
+
+
+def eval_expression(expr, parameters):
+    keys = sort(parameters.keys(), key: lambda x: len(x))
+    print(keys)
+    raise
