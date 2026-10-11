@@ -59,18 +59,23 @@ class Investigator:
         p_y_cond_x_z[(1,0)] = safediv(count_y_cond_x_not_z,count_not_z_x)
         p_y_cond_x_z[(0,0)] = safediv(count_y_cond_not_x_not_z,count_not_z_not_x)
 
+        p_z_cond_x = {}
+        for x in (0, 1):
+            for z in (0, 1):
+                p_z_cond_x[(z, x)] = p_z_x[(z, x)] / p_x[x]
+
         b = 0
         for z in (0, 1):
             t = 0
             for x in (0, 1):
                 t += p_y_cond_x_z[(x, z)] * p_x[x]
-            b += p_z_x[z, 1] * t
+            b += p_z_cond_x[(z, 1)] * t
 
         a = 0
         for z in (0, 1):
             t = 0
             for x in (0, 1):
                 t += p_y_cond_x_z[(x, z)] * p_x[x]
-            a += p_z_x[z, 0] * t
+            a += p_z_cond_x[(z, 0)] * t
 
         return a, b
