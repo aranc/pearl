@@ -3,6 +3,10 @@ N=100000
 #python3 go.py --num_samples $N --model "x->y;z->x;z->y" --parameters rand --investigators rct naive "back(z)"
 #python3 go.py --num_samples $N --model "x->z;z->y;h->x;h->y" --parameters rand --investigators rct naive "front(z)"
 
-echo TODO: RCT is still not correct
-python3 go.py --num_samples 100000 --model "x->y;z->x;z->y" --parameters rand --investigators rct --eval "z*(z->y)"
 
+#########################################3
+
+#python3 go.py --num_samples $N --model "x->y;z->x;z->y" --parameters rand --investigators rct --eval "z*(z->y)" --eval "1-(1-z*(z->y))" --eval "1-(1-z*(z->y))*(1-(x->y))"
+
+echo back doesnt work
+python3 go.py --num_samples $N --model "x->y;z->x;z->y" --parameters rand --investigators rct naive "back(z)"
