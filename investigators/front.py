@@ -1,5 +1,6 @@
 #frontdoor casual investigator
 import random
+from utils import safediv
 
 class Investigator:
     def __init__(self, args):
@@ -43,20 +44,20 @@ class Investigator:
                 count_y_cond_not_x_not_z += y_val
 
         p_x = {}
-        p_x[1] = count_x / num_samples
+        p_x[1] = safediv(count_x, num_samples)
         p_x[0] = 1 - p_x[1]
 
         p_z_x = {}
-        p_z_x[(1,1)] = count_z_x/num_samples
-        p_z_x[(0,1)] = count_not_z_x/num_samples
-        p_z_x[(1,0)] = count_z_not_x/num_samples
-        p_z_x[(0,0)] = count_not_z_not_x/num_samples
+        p_z_x[(1,1)] = safediv(count_z_x,num_samples)
+        p_z_x[(0,1)] = safediv(count_not_z_x,num_samples)
+        p_z_x[(1,0)] = safediv(count_z_not_x,num_samples)
+        p_z_x[(0,0)] = safediv(count_not_z_not_x,num_samples)
 
         p_y_cond_x_z = {}
-        p_y_cond_x_z[(1,1)] = count_y_cond_x_z / count_z_x
-        p_y_cond_x_z[(0,1)] = count_y_cond_not_x_z / count_z_not_x
-        p_y_cond_x_z[(1,0)] = count_y_cond_x_not_z / count_not_z_x
-        p_y_cond_x_z[(0,0)] = count_y_cond_not_x_not_z / count_not_z_not_x
+        p_y_cond_x_z[(1,1)] = safediv(count_y_cond_x_z,count_z_x)
+        p_y_cond_x_z[(0,1)] = safediv(count_y_cond_not_x_z,count_z_not_x)
+        p_y_cond_x_z[(1,0)] = safediv(count_y_cond_x_not_z,count_not_z_x)
+        p_y_cond_x_z[(0,0)] = safediv(count_y_cond_not_x_not_z,count_not_z_not_x)
 
         b = 0
         for z in (0, 1):
