@@ -1,2 +1,4 @@
+python3 main.py --model "x->y" --parameters rand --investigators rct naive
 python3 main.py --model "x->y;z->x;z->y" --parameters rand --investigators rct naive "back(z)"
+python3 main.py --model "x->z;z->y;h->x;h->y" --parameters rand --investigators rct naive "front(z)"
 
