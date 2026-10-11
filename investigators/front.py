@@ -64,13 +64,13 @@ class Investigator:
             t = 0
             for x in (0, 1):
                 t += p_y_cond_x_z[(x, z)] * p_x[x]
-            b += p_z_x(z, 1) * t
+            b += p_z_x[z, 1] * t
 
         a = 0
         for z in (0, 1):
             t = 0
             for x in (0, 1):
                 t += p_y_cond_x_z[(x, z)] * p_x[x]
-            a += p_z_x(z, 0) * t
+            a += p_z_x[z, 0] * t
 
         return a, b
