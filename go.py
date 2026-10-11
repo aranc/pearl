@@ -48,4 +48,4 @@ for world_idx, world in enumerate(worlds):
     # Debug code: eval symbolic expressions containing world parameters
     if args.eval:
         for expr in args.eval:
-            print(expr, eval_expression(expr, world.parameters()))
+            print(expr, eval_expression(expr, world.parameters(raw=True)))
