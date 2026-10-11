@@ -21,7 +21,7 @@ def eval_expression(expr, parameters):
         expr = expr.replace(key, str(parameters[key]))
     return eval(expr)
 
-def safediv(a, b):
-    if a == 0 and b == 0:
-        return 0
+def safediv(a, b): #actually.. keeping it unsafe to not mask an error
+    #if a == 0 and b == 0:
+    #    return 0
     return a / b
