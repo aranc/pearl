@@ -92,8 +92,11 @@ class World:
             if x in do:
                 res[x] = do[x]
             else:
-                #noisy or sampling
-                p = 1 - prod(*[(1 - self.noisy_or[x][parent]) if res[parent] else 1 for parent in self.parents[x]])
+                if x in self.prime:
+                    p = self.prime[x]
+                else:
+                    #noisy or sampling
+                    p = 1 - prod(*[(1 - self.noisy_or[x][parent]) if res[parent] else 1 for parent in self.parents[x]])
                 res[x] = 1 if random.random() <= p else 0
 
             # update dependencies graph and update next_up
