@@ -15,4 +15,4 @@ N=100
 
 #front
 echo TODO: fix front
-python3 go.py --num_samples $N --model "x->z;z->y;h->x;h->y" --parameters rand --investigators rct naive "front(z)"
+python3 go.py --num_samples $N --model "x->z;z->y;h->x;h->y;w->x" --parameters rand --investigators rct naive "front(z)"
