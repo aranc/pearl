@@ -117,10 +117,10 @@ class World:
         if raw:
             res = {}
             for x in self.prime:
-                raw[x] = self.prime[x]
+                res[x] = self.prime[x]
             for x in self.noisy_or:
                 for y in self.noisy_or[x]:
-                    raw[f"{y}->{x}"] = self.noisy_or[x][y]
+                    res[f"{y}->{x}"] = self.noisy_or[x][y]
             return res
 
         s = ""
