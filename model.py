@@ -19,19 +19,19 @@ def prod(*args):
 
 class Template:
     def __init__(self, edges:str):
-        _edges = {}
+        _edges = []
         for arrow in edges.split(";"):
             a, b = parse_arrow_expression(arrow)
-            _edges[b] = a
+            _edges.append((b, a))
         self.init(_edges)
 
-    def init(self, edges:dict[str, str]):
+    def init(self, edges:list[tuple[str, str]]):
         self.edges = deepcopy(edges)
         self.nodes = []
         self.parents = {}
         self.childs = {}
 
-        for x, y in edges.items():
+        for x, y in edges:
             if x not in self.nodes:
                 self.nodes.append(x)
                 self.parents[x] = []
