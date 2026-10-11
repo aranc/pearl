@@ -12,36 +12,54 @@ class Investigator:
 
         samples = [world() for _ in range(num_samples)]
 
-        res_x_z = {0:0, 1:0}
-        count_x_z = {0:0, 1:0}
-        res_z_y = {0:0, 1:0}
-        count_z_y = {0:0, 1:0}
-
         for sample in samples:
             x_val = sample[x]
             y_val = sample[y]
             z_val = sample[z]
 
-            count_x_z[x_val] += 1
-            res_x_z[x_val] += z_val
+            count_x += x_val
+            count_z_x += z_val * x_val
+            count_not_z_x += (1-z_val) * x_val
+            count_not_z_not_x += (1-z_val) * (1-x_val)
+            count_z_not_x += z_val * (1-x_val)
 
-            count_z_y[z_val] += 1
-            res_z_y[z_val] += y_val
+            if x_val * z_val:
+                count_y_cond_x_z += y_val
+            if (1-x_val) * z_val:
+                count_y_cond_not_x_z += y_val
+            if x_val * (1-z_val):
+                count_y_cond_x_not_z += y_val
+            if (1-x_val) * (1-z_val):
+                count_y_cond_not_x_not_z += y_val
 
-        x_causes_z = res_x_z[1] / count_x_z[1]
-        not_x_causes_z = res_x_z[0] / count_x_z[0]
+        p_x = {}
+        p_x[1] = count_x / num_samples
+        p_x[0] = 1 - p_x[1]
 
-        z_causes_y = res_z_y[1] / res_z_y[1]
-        not_z_causes_y = res_z_y[0] / res_z_y[1]
+        p_z_x = {}
+        p_z_x[(1,1)] = count_z_x/num_samples
+        p_z_x[(0,1)] = count_not_z_x/num_samples
+        p_z_x[(1,0)] = count_z_not_x/num_samples
+        p_z_x[(0,0)] = count_not_z_not_x/num_samples
 
-        x_causes_not_z = 1 - x_causes_z
-        not_x_causes_not_z = 1 - not_x_causes_z
+        p_y_cond_x_z = {}
+        p_y_cond_x_z[(1,1)] = count_y_cond_x_z / count_z_x
+        p_y_cond_x_z[(0,1)] = count_y_cond_not_x_z / count_z_not_x
+        p_y_cond_x_z[(1,0)] = count_y_cond_x_not_z / count_not_z_x
+        p_y_cond_x_z[(0,0)] = count_y_cond_not_x_not_z / count_not_z_not_x
 
-        not_x = count_x_z[0] / num_samples
-        yes_x = count_x_z[1] / num_samples
-        
-        a = (not_x * not_x_causes_z + yes_x * x_causes_z) * z_causes_y + (yes_x * x_causes_not_z + not_x * not_x_causes_not_z) * not_z_causes_y
-        b = (not_x * not_x_causes_z + yes_x * x_causes_z) * z_causes_y + (yes_x * x_causes_not_z + not_x * not_x_causes_not_z) * not_z_causes_y
+        b = 0
+        for z in (0, 1):
+            t = 0
+            for x in (0, 1):
+                t += p_y_cond_x_z[(x, z)] * p_x[x]
+            b += p_z_x(z, 1) * t
 
-        # is this really the same as equations.png??
+        a = 0
+        for z in (0, 1):
+            t = 0
+            for x in (0, 1):
+                t += p_y_cond_x_z[(x, z)] * p_x[x]
+            a += p_z_x(z, 0) * t
+
         return a, b
