@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--model", default="x->y;z->x;z->y")
 parser.add_argument("--parameters", nargs="+", default=["rand"])
 parser.add_argument("--investigators", nargs="+", default=["rct"])
-parser.add_argument("--num_samples", type=int, default=10000)
+parser.add_argument("--num_samples", type=int, default=100000)
 parser.add_argument("--question", default="x->y")
 args = parser.parse_args()
 
