@@ -55,7 +55,7 @@ class Investigator:
 
         p_y_cond_z = {}
         p_y_cond_z[1] = count_y_cond_z / count_z
-        p_y_cond_z[0] = 1 - p_y_cond_x_z[1]
+        p_y_cond_z[0] = 1 - p_y_cond_z[1]
 
         p_z_cond_x = {}
         for x in (0, 1):
