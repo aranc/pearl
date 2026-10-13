@@ -14,6 +14,7 @@ class Investigator:
         samples = [world() for _ in range(num_samples)]
 
         count_x = 0
+        count_z = 0
         count_z_x = 0
         count_not_z_x = 0
         count_not_z_not_x = 0
