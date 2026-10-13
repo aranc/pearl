@@ -62,11 +62,7 @@ class Investigator:
             for z in (0, 1):
                 p_z_cond_x[(z, x)] = p_z_x[(z, x)] / p_x[x]
 
-        p_not_z_cond_x = {}
-        p_not_z_cond_x[1] = 1 - p_z_cond_x[1]
-        p_not_z_cond_x[0] = 1 - p_z_cond_x[0]
-
-        b = p_z_cond_x[1] * p_y_cond_z[1] + p_not_z_cond_x[1] * p_y_cond_z[0]
-        a = p_z_cond_x[0] * p_y_cond_z[1] + p_not_z_cond_x[0] * p_y_cond_z[0]
+        b = p_z_cond_x[1, 1] * p_y_cond_z[1] + p_z_cond_x[0, 1] * p_y_cond_z[0]
+        a = p_z_cond_x[1, 0] * p_y_cond_z[1] + p_z_cond_x[0, 0] * p_y_cond_z[0]
 
         return a, b
